@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -29,12 +29,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="4dp"
-            android:text="0"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -70,7 +70,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button38"
+                android:id="@+id/buttonRad"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -83,7 +83,7 @@
                 android:textSize="17sp" />
 
             <Button
-                android:id="@+id/button18"
+                android:id="@+id/buttonRoot"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -93,10 +93,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="√"
+                android:onClick="Click_root"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonAC"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -106,10 +107,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="AC"
+                android:onClick="Click_clear"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/button_aa"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -135,7 +137,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/buttonDiv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -145,10 +147,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="÷"
+                android:onClick="Click_div"
                 android:textSize="24sp" />
 
-        </TableRow>÷
-
+        </TableRow>
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -156,7 +158,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button33"
+                android:id="@+id/buttonSin"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -166,10 +168,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="sin"
+                android:onClick="Click_sin"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button34"
+                android:id="@+id/buttonCos"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -179,10 +182,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="cos"
+                android:onClick="Click_cos"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button20"
+                android:id="@+id/buttonTan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -192,10 +196,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="tan"
+                android:onClick="Click_tan"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button_7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -205,10 +210,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="7"
+                android:onClick="Click_7"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/button_8"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -218,10 +224,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="8"
+                android:onClick="Click_8"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_9"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -231,10 +238,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="9"
+                android:onClick="Click_9"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/buttonMul"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -244,6 +252,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="x"
+                android:onClick="Click_multi"
                 android:textSize="20sp" />
 
         </TableRow>
@@ -255,7 +264,7 @@
             android:hapticFeedbackEnabled="false">
 
             <Button
-                android:id="@+id/button23"
+                android:id="@+id/buttonLn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -265,10 +274,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="㏑"
+                android:onClick="Click_ln"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button24"
+                android:id="@+id/buttonLog"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -278,10 +288,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="㏒"
+                android:onClick="Click_log"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button22"
+                android:id="@+id/buttonFraction"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -294,7 +305,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/button_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -304,10 +315,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="4"
+                android:onClick="Click_4"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/button_5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -317,10 +329,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="5"
+                android:onClick="Click_5"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/button_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -330,10 +343,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="6"
+                android:onClick="Click_6"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/buttonMin"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -343,6 +357,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="-"
+                android:onClick="Click_sub"
                 android:textSize="24sp" />
         </TableRow>
 
@@ -367,7 +382,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button28"
+                android:id="@+id/buttonPower"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -377,6 +392,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="x²"
+                android:onClick="Click_power"
                 android:textSize="24sp" />
 
             <Button
@@ -394,7 +410,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/button_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -404,10 +420,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="1"
+                android:onClick="Click_1"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/button_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -417,10 +434,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="2"
+                android:onClick="Click_2"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/button_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -430,10 +448,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="3"
+                android:onClick="Click_3"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button12"
+                android:id="@+id/buttonAdd"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -443,6 +462,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="+"
+                android:onClick="Click_add"
                 android:textSize="24sp" />
         </TableRow>
 
@@ -466,7 +486,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button32"
+                android:id="@+id/buttonPhi"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -507,7 +527,7 @@
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button14"
+                android:id="@+id/button_0"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -517,6 +537,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="0"
+                android:onClick="Click_0"
                 android:textSize="24sp" />
 
             <Button
@@ -530,10 +551,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="."
+                android:onClick="Click_dot"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/button16"
+                android:id="@+id/buttonResult"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -543,6 +565,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="="
+                android:onClick="Click_Result"
                 android:textSize="24sp" />
         </TableRow>
     </TableLayout>
