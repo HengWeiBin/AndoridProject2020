@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -11,14 +12,14 @@ public class MainActivity extends AppCompatActivity {
     TextView mInput,mSign;
     String sign,value1,value2;
     Double num1,num2,result;
-    boolean decimalNumber;
+    boolean decimalNumber , onShift;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mInput=(TextView)findViewById(R.id.input);
         mSign=(TextView)findViewById(R.id.sign);
-        decimalNumber = false;
+        decimalNumber = onShift = false;
     }
 
     public void Click_0 (View view) {
@@ -27,9 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public void Click_1 (View view) {
         mInput.setText(mInput.getText()+"1");
     }
-    public void Click_2 (View view) {
-        mInput.setText(mInput.getText()+"2");
-    }
+    public void Click_2 (View view) { mInput.setText(mInput.getText()+"2"); }
     public void Click_3 (View view) {
         mInput.setText(mInput.getText()+"3");
     }
@@ -42,15 +41,9 @@ public class MainActivity extends AppCompatActivity {
     public void Click_6 (View view) {
         mInput.setText(mInput.getText()+"6");
     }
-    public void Click_7 (View view) {
-        mInput.setText(mInput.getText()+"7");
-    }
-    public void Click_8 (View view) {
-        mInput.setText(mInput.getText()+"8");
-    }
-    public void Click_9 (View view) {
-        mInput.setText(mInput.getText()+"9");
-    }
+    public void Click_7 (View view) { mInput.setText(mInput.getText()+"7"); }
+    public void Click_8 (View view) { mInput.setText(mInput.getText()+"8"); }
+    public void Click_9 (View view) { mInput.setText(mInput.getText()+"9"); }
     public void Click_dot(View view){
         if(!decimalNumber){
             if(mInput.getText().equals("")){
@@ -253,6 +246,52 @@ public class MainActivity extends AppCompatActivity {
         value2 = null;
         sign = null;
         decimalNumber = false;
+    }
+    public void SecondPage(View view) {
+        Button button1 = findViewById(R.id.buttonRoot);
+        Button button2 = findViewById(R.id.buttonSin);
+        Button button3 = findViewById(R.id.buttonCos);
+        Button button4 = findViewById(R.id.buttonTan);
+        Button button5 = findViewById(R.id.buttonLn);
+        Button button6 = findViewById(R.id.buttonLog);
+        Button button7 = findViewById(R.id.buttonFraction);
+        Button button8 = findViewById(R.id.button27);
+        Button button9 = findViewById(R.id.buttonPower);
+        Button button10 = findViewById(R.id.button26);
+        Button button11 = findViewById(R.id.button31);
+        Button button12 = findViewById(R.id.buttonPhi);
+        Button button13 = findViewById(R.id.button30);
+        if (!onShift) {
+            onShift=true;
+            button1.setText("3√");
+            button2.setText("sin-1");
+            button3.setText("cos-1");
+            button4.setText("tan-1");
+            button5.setText("sinh");
+            button6.setText("cosh");
+            button7.setText("tanh");
+            button8.setText("sinh-1");
+            button9.setText("cosh-1");
+            button10.setText("tanh-1");
+            button11.setText("2x");
+            button12.setText("x3");
+            button13.setText("x!");
+        } else {
+            onShift=false;
+            button1.setText("√");
+            button2.setText("sin");
+            button3.setText("cos");
+            button4.setText("tan");
+            button5.setText("㏑");
+            button6.setText("㏒");
+            button7.setText("1/x");
+            button8.setText("ex");
+            button9.setText("x²");
+            button10.setText("xy");
+            button11.setText("|x|");
+            button12.setText("π");
+            button13.setText("e");
+        }
     }
 
 

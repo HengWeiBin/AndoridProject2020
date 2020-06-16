@@ -1,0 +1,10 @@
+id : buttonRad -> rad
+id : button -> +/-
+id : button2 -> %
+id : buttonFraction -> 1/x
+id : button27 -> e^x
+id : button26 -> x^y
+id : button31 -> absolut |x|
+id : buttonPhi -> phi
+id : button30 -> e
+id : button14 -> ()
