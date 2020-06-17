@@ -7,8 +7,8 @@
     <string name="switchSign">+/-</string>
     <string name="percent">%</string>
     <string name="divide">÷</string>
-    <string name="sin">sin</string>
-    <string name="cosin">cos</string>
+    <string name="sine">sin</string>
+    <string name="cosine">cos</string>
     <string name="tan">tan</string>
     <string name="seven">7</string>
     <string name="eight">8</string>
@@ -16,4 +16,35 @@
     <string name="multi">x</string>
     <string name="naturalLog">㏑</string>
     <string name="log">㏒</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="minus">-</string>
+    <string name="ePower">e^</string>
+    <string name="square">x²</string>
+    <string name="power">^</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="plus">+</string>
+    <string name="absolute">|X|</string>
+    <string name="pi">π</string>
+    <string name="backspace">←</string>
+    <string name="zero">0</string>
+    <string name="dot">.</string>
+    <string name="equal">=</string>
+    <string name="fraction">¹⁄ₓ</string>
+    <string name="inverseCosine">cos⁻¹</string>
+    <string name="inverseSine">sin⁻¹</string>
+    <string name="inverseTangent">tan⁻¹</string>
+    <string name="hyperbolicSine">sinh</string>
+    <string name="hyperbolicCosine">cosh</string>
+    <string name="hyperbolicTangent">tanh</string>
+    <string name="inverseHyperSine">sinh⁻¹</string>
+    <string name="inverseHyperCosine">cash⁻¹</string>
+    <string name="inverseHyperTangent">tanh⁻¹</string>
+    <string name="twoPower">2^</string>
+    <string name="cube">x³</string>
+    <string name="factorial">X!</string>
+    <string name="error">Error!</string>
 </resources>

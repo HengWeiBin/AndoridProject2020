@@ -2,6 +2,7 @@ package ntut.org.example.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
+@SuppressLint("SetTextI18n")
 public class MainActivity extends AppCompatActivity {
 
     TextView mInput,mSign;
@@ -24,25 +26,14 @@ public class MainActivity extends AppCompatActivity {
         decimalNumber = onShift = false;
     }
 
-    public void Click_0 (View view) {
-        mInput.setText(mInput.getText()+"0");
-    }
-    public void Click_1 (View view) {
-        mInput.setText(mInput.getText()+"1");
-    }
+
+    public void Click_0 (View view) { mInput.setText(mInput.getText()+"0"); }
+    public void Click_1 (View view) { mInput.setText(mInput.getText()+"1"); }
     public void Click_2 (View view) { mInput.setText(mInput.getText()+"2"); }
-    public void Click_3 (View view) {
-        mInput.setText(mInput.getText()+"3");
-    }
-    public void Click_4 (View view) {
-        mInput.setText(mInput.getText()+"4");
-    }
-    public void Click_5 (View view) {
-        mInput.setText(mInput.getText()+"5");
-    }
-    public void Click_6 (View view) {
-        mInput.setText(mInput.getText()+"6");
-    }
+    public void Click_3 (View view) { mInput.setText(mInput.getText()+"3"); }
+    public void Click_4 (View view) { mInput.setText(mInput.getText()+"4"); }
+    public void Click_5 (View view) { mInput.setText(mInput.getText()+"5"); }
+    public void Click_6 (View view) { mInput.setText(mInput.getText()+"6"); }
     public void Click_7 (View view) { mInput.setText(mInput.getText()+"7"); }
     public void Click_8 (View view) { mInput.setText(mInput.getText()+"8"); }
     public void Click_9 (View view) { mInput.setText(mInput.getText()+"9"); }
@@ -138,13 +129,14 @@ public class MainActivity extends AppCompatActivity {
             mSign.setText("root");
         }
     }
+
     public void Click_Result(View view){
         if (sign == null) {
-            mSign.setText("Error!");
+            mSign.setText(R.string.error);
         } else if (mInput.getText().equals("")) {
-            mSign.setText("Error!");
+            mSign.setText(R.string.error);
         } else if ((sign.equals("+") || sign.equals("-") || sign.equals("*") || sign.equals("/")) && value1.equals("")) {
-            mSign.setText("Error!");
+            mSign.setText(R.string.error);
         } else {
             switch (sign) {
                 default:
@@ -253,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
     public void Click_clear(View view) {
         mInput.setText(null);
         mSign.setText(null);
@@ -261,53 +254,57 @@ public class MainActivity extends AppCompatActivity {
         sign = null;
         decimalNumber = false;
     }
-    public void SecondPage(View view) {
-        Button button1 = findViewById(R.id.buttonRoot);
-        Button button2 = findViewById(R.id.buttonSin);
-        Button button3 = findViewById(R.id.buttonCos);
-        Button button4 = findViewById(R.id.buttonTan);
-        Button button5 = findViewById(R.id.buttonLn);
-        Button button6 = findViewById(R.id.buttonLog);
-        Button button7 = findViewById(R.id.buttonFraction);
-        Button button8 = findViewById(R.id.button27);
-        Button button9 = findViewById(R.id.buttonPower);
-        Button button10 = findViewById(R.id.button26);
-        Button button11 = findViewById(R.id.button31);
-        Button button12 = findViewById(R.id.buttonPhi);
-        Button button13 = findViewById(R.id.button30);
+
+    public void SwitchPage(View view) {
+        Button buttonRoot = findViewById(R.id.buttonRoot);
+        Button buttonSin = findViewById(R.id.buttonSin);
+        Button buttonCos = findViewById(R.id.buttonCos);
+        Button buttonTan = findViewById(R.id.buttonTan);
+        Button buttonLn = findViewById(R.id.buttonLn);
+        Button buttonLog = findViewById(R.id.buttonLog);
+        Button buttonFraction = findViewById(R.id.buttonFraction);
+        Button button27 = findViewById(R.id.button27);
+        Button buttonSquare = findViewById(R.id.buttonSquare);
+        Button buttonPower = findViewById(R.id.buttonPower);
+        Button buttonAbsolute = findViewById(R.id.buttonAbsolute);
+        Button buttonPhi = findViewById(R.id.buttonPhi);
+        Button buttonFactorial = findViewById(R.id.buttonFactorial);
         if (!onShift) {
             onShift=true;
-            button1.setText("³√");
-            button2.setText("sin⁻¹");
-            button3.setText("cos⁻¹");
-            button4.setText("tan⁻¹");
-            button5.setText("sinh");
-            button6.setText("cosh");
-            button7.setText("tanh");
-            button8.setText("sinh⁻¹");
-            button8.setTextSize(COMPLEX_UNIT_SP,18);
-            button9.setText("cash⁻¹");
-            button9.setTextSize(COMPLEX_UNIT_SP,18);
-            button10.setText("tanh⁻¹");
-            button10.setTextSize(COMPLEX_UNIT_SP,18);
-            button11.setText("2");
-            button12.setText("x³");
-            button13.setText("X!");
+            buttonRoot.setText("³√");
+            buttonSin.setText(R.string.inverseSine);
+            buttonCos.setText(R.string.inverseCosine);
+            buttonTan.setText(R.string.inverseTangent);
+            buttonLn.setText(R.string.hyperbolicSine);
+            buttonLog.setText(R.string.hyperbolicCosine);
+            buttonFraction.setText(R.string.hyperbolicTangent);
+            button27.setText(R.string.inverseHyperSine);
+            button27.setTextSize(COMPLEX_UNIT_SP,18);
+            buttonSquare.setText(R.string.inverseHyperCosine);
+            buttonSquare.setTextSize(COMPLEX_UNIT_SP,18);
+            buttonPower.setText(R.string.inverseHyperTangent);
+            buttonPower.setTextSize(COMPLEX_UNIT_SP,18);
+            buttonAbsolute.setText(R.string.twoPower);
+            buttonPhi.setText(R.string.cube);
+            buttonFactorial.setText(R.string.factorial);
         } else {
             onShift=false;
-            button1.setText("√");
-            button2.setText("sin");
-            button3.setText("cos");
-            button4.setText("tan");
-            button5.setText("㏑");
-            button6.setText("㏒");
-            button7.setText("¹⁄ₓ");
-            button8.setText("e^");
-            button9.setText("x²");
-            button10.setText("x^");
-            button11.setText("|x|");
-            button12.setText("π");
-            button13.setText("e");
+            buttonRoot.setText(R.string.squareRoot);
+            buttonSin.setText(R.string.sine);
+            buttonCos.setText(R.string.cosine);
+            buttonTan.setText(R.string.tan);
+            buttonLn.setText(R.string.naturalLog);
+            buttonLog.setText(R.string.log);
+            buttonFraction.setText(R.string.fraction);
+            button27.setText(R.string.ePower);
+            button27.setTextSize(COMPLEX_UNIT_SP,20);
+            buttonSquare.setText(R.string.square);
+            buttonSquare.setTextSize(COMPLEX_UNIT_SP,20);
+            buttonPower.setText(R.string.power);
+            buttonPower.setTextSize(COMPLEX_UNIT_SP,20);
+            buttonAbsolute.setText(R.string.absolute);
+            buttonPhi.setText(R.string.pi);
+            buttonFactorial.setText("e");
         }
     }
 
