@@ -1,6 +1,6 @@
 id : buttonRad -> rad
-id : button -> +/-
-id : button2 -> %
+id : buttonSwitchSign -> +/-
+id : buttonPercent -> %
 id : buttonFraction -> 1/x
 id : button27 -> e^x
 id : button26 -> x^y
