@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView mInput,mSign;
@@ -89,40 +91,52 @@ public class MainActivity extends AppCompatActivity {
         mSign.setText("sin");
     }
     public void Click_cos(View view){
-        sign = "cos";
-        value1 = mInput.getText().toString();
-        mInput.setText(null);
-        mSign.setText("cos");
+        if(!onShift) {
+            sign = "cos";
+            value1 = mInput.getText().toString();
+            mInput.setText(null);
+            mSign.setText("cos");
+        }
     }
     public void Click_tan(View view){
-        sign = "tan";
-        value1 = mInput.getText().toString();
-        mInput.setText(null);
-        mSign.setText("tan");
+        if(!onShift) {
+            sign = "tan";
+            value1 = mInput.getText().toString();
+            mInput.setText(null);
+            mSign.setText("tan");
+        }
     }
     public void Click_log(View view){
-        sign = "log";
-        value1 = mInput.getText().toString();
-        mInput.setText(null);
-        mSign.setText("log");
+        if(!onShift) {
+            sign = "log";
+            value1 = mInput.getText().toString();
+            mInput.setText(null);
+            mSign.setText("log");
+        }
     }
     public void Click_ln(View view){
-        sign = "ln";
-        value1 = mInput.getText().toString();
-        mInput.setText(null);
-        mSign.setText("ln");
+        if(!onShift) {
+            sign = "ln";
+            value1 = mInput.getText().toString();
+            mInput.setText(null);
+            mSign.setText("ln");
+        }
     }
     public void Click_power(View view){
-        sign = "power";
-        value1 = mInput.getText().toString();
-        mInput.setText(null);
-        mSign.setText("power");
+        if(!onShift) {
+            sign = "power";
+            value1 = mInput.getText().toString();
+            mInput.setText(null);
+            mSign.setText("power");
+        }
     }
     public void Click_root(View view){
-        sign = "root";
-        value1 = mInput.getText().toString();
-        mInput.setText(null);
-        mSign.setText("root");
+        if(!onShift) {
+            sign = "root";
+            value1 = mInput.getText().toString();
+            mInput.setText(null);
+            mSign.setText("root");
+        }
     }
     public void Click_Result(View view){
         if (sign == null) {
@@ -264,24 +278,27 @@ public class MainActivity extends AppCompatActivity {
         if (!onShift) {
             onShift=true;
             button1.setText("3√");
-            button2.setText("sin-1");
-            button3.setText("cos-1");
-            button4.setText("tan-1");
-            button5.setText("sinh");
-            button6.setText("cosh");
-            button7.setText("tanh");
-            button8.setText("sinh-1");
-            button9.setText("cosh-1");
-            button10.setText("tanh-1");
+            button2.setText("SIN-1");
+            button3.setText("COS-1");
+            button4.setText("TAN-1");
+            button5.setText("SINH");
+            button6.setText("COSH");
+            button7.setText("TANH");
+            button8.setText("SINH-1");
+            button8.setTextSize(COMPLEX_UNIT_SP,18);
+            button9.setText("COSH-1");
+            button9.setTextSize(COMPLEX_UNIT_SP,18);
+            button10.setText("TANH-1");
+            button10.setTextSize(COMPLEX_UNIT_SP,18);
             button11.setText("2x");
             button12.setText("x3");
-            button13.setText("x!");
+            button13.setText("X!");
         } else {
             onShift=false;
             button1.setText("√");
-            button2.setText("sin");
-            button3.setText("cos");
-            button4.setText("tan");
+            button2.setText("SIN");
+            button3.setText("COS");
+            button4.setText("TAN");
             button5.setText("㏑");
             button6.setText("㏒");
             button7.setText("1/x");
