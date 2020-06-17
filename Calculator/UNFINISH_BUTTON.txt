@@ -7,4 +7,4 @@ id : button26 -> x^y
 id : button31 -> absolut |x|
 id : buttonPhi -> phi
 id : button30 -> e
-id : button14 -> ()
+id : button14 -> backspace
