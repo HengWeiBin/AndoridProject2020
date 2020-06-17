@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Calculator</string>
+    <string name="switchPage">⇆</string>
+    <string name="radius">Rad</string>
+    <string name="squareRoot">√</string>
+    <string name="clear">AC</string>
+    <string name="switchSign">+/-</string>
+    <string name="percent">%</string>
+    <string name="divide">÷</string>
+    <string name="sin">sin</string>
+    <string name="cosin">cos</string>
+    <string name="tan">tan</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="multi">x</string>
+    <string name="naturalLog">㏑</string>
+    <string name="log">㏒</string>
 </resources>
