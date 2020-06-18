@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         decimalNumber = onShift = false;
     }
 
-
     public void Click_0 (View view) { mInput.setText(mInput.getText()+"0"); }
     public void Click_1 (View view) { mInput.setText(mInput.getText()+"1"); }
     public void Click_2 (View view) { mInput.setText(mInput.getText()+"2"); }
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             decimalNumber=true;
         }
     }
+
     public void Click_add(View view){
         sign = "+";
         value1 = mInput.getText().toString();
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mSign.setText("+");
         decimalNumber=false;
     }
+
     public void Click_sub(View view){
         sign = "-";
         value1 = mInput.getText().toString();
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mSign.setText("-");
         decimalNumber=false;
     }
+
     public void Click_multi(View view){
         sign = "*";
         value1 = mInput.getText().toString();
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         mSign.setText("x");
         decimalNumber=false;
     }
+
     public void Click_div(View view){
         sign = "/";
         value1 = mInput.getText().toString();
@@ -75,12 +78,14 @@ public class MainActivity extends AppCompatActivity {
         mSign.setText("/");
         decimalNumber=false;
     }
+
     public void Click_sin(View view){
         sign = "sin";
         value1 = mInput.getText().toString();
         mInput.setText(null);
         mSign.setText("sin");
     }
+
     public void Click_cos(View view){
         if(!onShift) {
             sign = "cos";
@@ -89,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             mSign.setText("cos");
         }
     }
+
     public void Click_tan(View view){
         if(!onShift) {
             sign = "tan";
@@ -97,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             mSign.setText("tan");
         }
     }
+
     public void Click_log(View view){
         if(!onShift) {
             sign = "log";
@@ -105,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             mSign.setText("log");
         }
     }
+
     public void Click_ln(View view){
         if(!onShift) {
             sign = "ln";
@@ -113,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
             mSign.setText("ln");
         }
     }
+
     public void Click_power(View view){
         if(!onShift) {
             sign = "power";
@@ -121,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             mSign.setText("power");
         }
     }
+
     public void Click_root(View view){
         if(!onShift) {
             sign = "root";
