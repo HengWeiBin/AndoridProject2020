@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/input"
+            android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -32,14 +32,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@id/sign"
+            android:id="@id/input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/zero"
-            android:textColor="@android:color/background_light"
+            android:hint="@string/zero"
+            android:textColor="@android:color/darker_gray"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -123,7 +123,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_div"
+                android:onClick="onClickOperator"
+                android:tag="@string/divide"
                 style="?android:borderlessButtonStyle" />
 
         </TableRow>
@@ -148,7 +149,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_7"
+                android:onClick="onClickNum"
+                android:tag="7"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -165,7 +167,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_8"
+                android:onClick="onClickNum"
+                android:tag="8"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -182,7 +185,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_9"
+                android:onClick="onClickNum"
+                android:tag="9"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -199,7 +203,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_multi"
+                android:onClick="onClickOperator"
+                android:tag="@string/multi"
                 style="?android:borderlessButtonStyle"/>
 
         </TableRow>
@@ -224,7 +229,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_4"
+                android:onClick="onClickNum"
+                android:tag="4"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -241,7 +247,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_5"
+                android:onClick="onClickNum"
+                android:tag="5"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -258,7 +265,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_6"
+                android:onClick="onClickNum"
+                android:tag="6"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -275,7 +283,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_sub"
+                android:onClick="onClickOperator"
+                android:tag="@string/minus"
                 style="?android:borderlessButtonStyle" />
         </TableRow>
 
@@ -299,7 +308,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_1"
+                android:onClick="onClickNum"
+                android:tag="1"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -316,7 +326,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_2"
+                android:onClick="onClickNum"
+                android:tag="2"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -333,7 +344,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_3"
+                android:onClick="onClickNum"
+                android:tag="3"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -350,7 +362,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_add"
+                android:onClick="onClickOperator"
+                android:tag="@string/plus"
                 style="?android:borderlessButtonStyle"/>
         </TableRow>
 
@@ -390,7 +403,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_0"
+                android:onClick="onClickNum"
+                android:tag="0"
                 style="?android:borderlessButtonStyle"/>
 
             <Button
@@ -407,7 +421,8 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                android:onClick="Click_dot"
+                android:onClick="onClickNum"
+                android:tag="@string/dot"
                 style="?android:borderlessButtonStyle"/>
 
             <Button

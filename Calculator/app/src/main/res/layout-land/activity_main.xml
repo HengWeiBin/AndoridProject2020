@@ -443,7 +443,7 @@
             android:hapticFeedbackEnabled="false">
 
             <Button
-                android:id="@+id/button27"
+                android:id="@+id/buttonEPower"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -614,7 +614,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:text="е"
+                android:text="@string/factorial"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
