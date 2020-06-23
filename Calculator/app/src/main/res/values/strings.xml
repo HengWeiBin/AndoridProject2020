@@ -41,10 +41,12 @@
     <string name="hyperbolicCosine">cosh</string>
     <string name="hyperbolicTangent">tanh</string>
     <string name="inverseHyperSine">sinh⁻¹</string>
-    <string name="inverseHyperCosine">cash⁻¹</string>
+    <string name="inverseHyperCosine">cosh⁻¹</string>
     <string name="inverseHyperTangent">tanh⁻¹</string>
     <string name="twoPower">2^</string>
     <string name="cube">x³</string>
     <string name="factorial">X!</string>
     <string name="error">Error!</string>
+    <string name="cubeRoot">³√</string>
+    <string name="e">e</string>
 </resources>
