@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         inv_hyp_sin, inv_hyp_cos, inv_hyp_tan,
         percent, ln, log, fraction,
         e_pow, square, cube, pow, abs,
-        squareRoot, cubeRoot, twoPow, factorial};
+        squareRoot, cubeRoot, twoPow,
+        factorial, switchSign};
 
     TextView mInput, mResult;
     String sign, value1, value2, valueFunc;
@@ -109,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
         //reset decimal detection
         decimalNumber = false;
 
+        //ignore when user click operator without input number
+        if (typing1 && value1.equals("")) return;
+
         if (onFunc)
         {
             if (typing1)
@@ -121,16 +125,16 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (typing2)
             {
-                sign = operator;
                 value2 = GetFunctionValue();
                 Click_Result(view);
+                sign = operator;
+                mInput.setText(value1 + sign);
             }
-            onFunc = false;
         }
-        if (typing1)
+        else if (typing1)
         {
             typing1 = false;
-            mInput.setText(mInput.getText() + operator);
+            mInput.setText(value1+ operator);
             sign = operator;
             typing2 = true;
         }
@@ -153,6 +157,16 @@ public class MainActivity extends AppCompatActivity {
         func = GetMathFunc(view.getTag().toString());
 
         switch(func) {
+            case switchSign:
+                if (typing1 && !value1.equals("")){
+                    value1 = String.valueOf(Double.parseDouble(value1) * -1);
+                    mInput.setText(value1);
+                }
+                else if (typing2 && !value2.equals("")){
+                    value2 = String.valueOf(Double.parseDouble(value2) * -1);
+                    mInput.setText(value1 + sign + "(" + value2 + ")");
+                }
+                break;
             case sin:
                 mInput.setText(mInput.getText() + "sin(");
                 onFunc = true;
@@ -229,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                 onFunc = true;
                 break;
             case square:
-                mInput.setText(mInput.getText() + getString(R.string.square));
+                mInput.setText(mInput.getText() + "²");
                 if (typing1){
                     value1 = String.valueOf(Math.pow(Double.parseDouble(value1), 2));
                     typing1 = false;
@@ -240,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case cube:
-                mInput.setText(mInput.getText() + getString(R.string.square));
+                mInput.setText(mInput.getText() + "³");
                 if (typing1){
                     value1 = String.valueOf(Math.pow(Double.parseDouble(value1), 3));
                     typing1 = false;
@@ -255,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
                 onFunc = true;
                 break;
             case abs:
-                mInput.setText(mInput.getText() + getString(R.string.absolute) + "(");
+                mInput.setText(mInput.getText() + "abs(");
                 onFunc = true;
                 break;
             case squareRoot:
@@ -271,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
                 onFunc = true;
                 break;
             case factorial:
-                mInput.setText(mInput.getText() + getString(R.string.factorial));
+                mInput.setText(mInput.getText() + "!");
                 if (typing1){
                     value1 = String.valueOf(factorial(Integer.parseInt(value1)));
                     typing1 = false;
@@ -320,6 +334,18 @@ public class MainActivity extends AppCompatActivity {
                     value2 = sign = "";
                 }
             }
+        }
+        else if (!value1.equals(""))
+        {
+            value2 = GetFunctionValue();
+            Click_Result(view);
+        }
+        else if(!valueFunc.equals(""))
+        {
+            result = Double.parseDouble(GetFunctionValue());
+            mResult.setText(String.valueOf(result));
+            value1 = String.valueOf(result);
+            value2 = sign = "";
         }
         else {
             mResult.setText(value1);
@@ -424,6 +450,11 @@ public class MainActivity extends AppCompatActivity {
 
     private String GetFunctionValue() {
         Double value = Double.parseDouble(valueFunc);
+
+        //reset typing function
+        onFunc = false;
+        valueFunc = "";
+
         switch(func)
         {
             case sin:
@@ -535,12 +566,16 @@ public class MainActivity extends AppCompatActivity {
     {
         decimalNumber = onShift = onFunc = typing2 = false;
         typing1 = true;
-        value1 = value2 = sign = "";
+        value1 = value2 = valueFunc = sign = "";
     }
 
     private math_func GetMathFunc(String function)
     {
-        if (getString(R.string.sine).equals(function)) {
+        if (getString(R.string.switchSign).equals(function))
+        {
+            return math_func.switchSign;
+        }
+        else if (getString(R.string.sine).equals(function)) {
             if (onShift)
                 return math_func.inv_sin;
             return math_func.sin;
