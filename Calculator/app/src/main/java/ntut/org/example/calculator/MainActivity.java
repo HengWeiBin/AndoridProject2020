@@ -89,26 +89,16 @@ public class MainActivity extends AppCompatActivity {
     {
         String value = view.getTag().toString();
 
-        //Show input to screen
-        //If value which user is inputting is empty, add "0." automatically
-        if (value.equals(getString(R.string.dot)))
-        {
-            if (onFunc && valueFunc.equals(""))
-                mInput.setText(mInput.getText() + "0.");
-            else if (typing1 && value1.equals(""))
-                mInput.setText(mInput.getText() + "0.");
-            else if (typing2 && value2.equals(""))
-                mInput.setText(mInput.getText() + "0.");
-        }
-        else
-            mInput.setText(mInput.getText() + value);
-
         //Write value to variable
         if (onFunc) valueFunc = InputValue(valueFunc, value);
 
         else if (typing1) value1 = InputValue(value1, value);
 
         else if (typing2) value2 = InputValue(value2, value);
+        //Do not show value on screen if all input is unavailable
+        else return;
+
+        ShowValue(value);
     }
 
     public void onClickOperator(View view)
@@ -149,6 +139,12 @@ public class MainActivity extends AppCompatActivity {
             Click_Result(view);
             sign = operator;
             mInput.setText(value1 + sign);
+        }
+        else
+        {
+            sign = operator;
+            mInput.setText(value1 + sign);
+            typing2 = true;
         }
     }
 
@@ -206,12 +202,12 @@ public class MainActivity extends AppCompatActivity {
                 onFunc = true;
                 break;
             case percent:
-                mInput.setText(mInput.getText() + getString(R.string.percent));
-                if (typing1){
+                if (typing1 && !value1.equals("")){
                     value1 = String.valueOf(Double.parseDouble(value1) / 100);
-                    typing1 = false;
+                    typing1 = typing2 = onFunc = false;
+                    mInput.setText(mInput.getText() + getString(R.string.percent));
                 }
-                else if (typing2){
+                else if (typing2 && !value2.equals("")){
                     value2 = String.valueOf(Double.parseDouble(value2) / 100);
                     Click_Result(view);
                 }
@@ -338,6 +334,10 @@ public class MainActivity extends AppCompatActivity {
         initCalculator();
     }
 
+    public void SwitchDegree(View view){
+        isRadiance = !isRadiance;
+    }
+
     public void SwitchPage(View view) {
         Button buttonRoot = findViewById(R.id.buttonRoot);
         Button buttonSin = findViewById(R.id.buttonSin);
@@ -403,6 +403,23 @@ public class MainActivity extends AppCompatActivity {
             else return string;
         }
         return string + value;
+    }
+
+    private void ShowValue(String value)
+    {
+        //Show input to screen
+        //If value which user is inputting is empty, add "0." automatically
+        if (value.equals(getString(R.string.dot)))
+        {
+            if (onFunc && valueFunc.equals(""))
+                mInput.setText(mInput.getText() + "0.");
+            else if (typing1 && value1.equals(""))
+                mInput.setText(mInput.getText() + "0.");
+            else if (typing2 && value2.equals(""))
+                mInput.setText(mInput.getText() + "0.");
+        }
+        else
+            mInput.setText(mInput.getText() + value);
     }
 
     private String GetFunctionValue() {
