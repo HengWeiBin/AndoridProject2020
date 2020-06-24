@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         percent, ln, log, fraction,
         e_pow, square, cube, pow, abs,
         squareRoot, cubeRoot, twoPow,
-        factorial, switchSign};
+        factorial, switchSign}
 
     TextView mInput, mResult;
     String sign, value1, value2, valueFunc;
@@ -48,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mInput = (TextView)findViewById(R.id.input);
-        mResult = (TextView)findViewById(R.id.result);
+        mInput = findViewById(R.id.input);
+        mResult = findViewById(R.id.result);
 
         if (savedInstanceState != null)
         {
-            mInput.setText(savedInstanceState.getString(M_INPUT));
-            mResult.setText(savedInstanceState.getString(M_RESULT));
+            SetText(mInput, savedInstanceState.getString(M_INPUT));
+            SetText(mResult, savedInstanceState.getString(M_RESULT));
             sign = savedInstanceState.getString(SIGN);
             value1 = savedInstanceState.getString(VALUE_1);
             value2 = savedInstanceState.getString(VALUE_2);
@@ -132,65 +133,63 @@ public class MainActivity extends AppCompatActivity {
 
             if (typing1)
             {
-                typing1 = false;
-                mInput.setText(mInput.getText() + ")" + operator);
-                sign = operator;
+                SetText(mInput, mInput.getText() + ")" + operator);
                 value1 = GetFunctionValue();
-                typing2 = true;
             }
             else if (typing2)
             {
                 value2 = GetFunctionValue();
                 Click_Result(view);
-                sign = operator;
-                mInput.setText(value1 + sign);
+                value1 = mResult.getText().toString();
+                SetText(mInput, value1 + operator);
             }
         }
         else if (typing1)
         {
-            typing1 = false;
-            mInput.setText(value1+ operator);
-            sign = operator;
-            typing2 = true;
+            SetText(mInput, value1+ operator);
         }
         else if (typing2 && !value2.equals(""))
         {
             Click_Result(view);
-            typing1 = false;
-            sign = operator;
             value1 = mResult.getText().toString();
-            mInput.setText(value1 + sign);
+            SetText(mInput, value1 + operator);
         }
         else
         {
-            sign = operator;
-            mInput.setText(value1 + sign);
-            typing2 = true;
+            SetText(mInput, value1 + operator);
         }
+        sign = operator;
+        typing1 = false;
+        typing2 = true;
     }
 
     public void onClickFunction(View view)
     {
-        //ignore user if he's typing any func's value
-        if (onFunc) return;
-
+        math_func temp = func;
         func = GetMathFunc(view.getTag().toString());
+
+        //ignore user if he's typing any func's value
+        if (func == null || (onFunc && func != math_func.switchSign)) return;
 
         switch(func) {
             case switchSign:
                 if (typing1 && !value1.equals("")) {
                     value1 = String.valueOf(Double.parseDouble(value1) * -1);
-                    mInput.setText(value1);
+                    SetText(mInput, value1);
                 } else if (typing2 && !value2.equals("")) {
                     value2 = String.valueOf(Double.parseDouble(value2) * -1);
-                    mInput.setText(value1 + sign + "(" + value2 + ")");
+                    SetText(mInput, value1 + sign + "(" + value2 + ")");
+                } else if (onFunc && !valueFunc.equals("")){
+                    valueFunc = String.valueOf(Double.parseDouble(valueFunc) * -1);
+                    SetText(mInput, RemoveCurrentValue(mInput.getText().toString(), '(') + valueFunc);
                 }
+                func = temp;
                 return;
             case percent:
                 if (typing1 && !value1.equals("")) {
                     value1 = String.valueOf(Double.parseDouble(value1) / 100);
                     typing1 = typing2 = onFunc = false;
-                    mInput.setText(mInput.getText() + getString(R.string.percent));
+                    SetText(mInput, mInput.getText() + getString(R.string.percent));
                 } else if (typing2 && !value2.equals("")) {
                     value2 = String.valueOf(Double.parseDouble(value2) / 100);
                     Click_Result(view);
@@ -200,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 if (typing1 && !value1.equals("")) {
                     value1 = String.valueOf(Math.pow(Double.parseDouble(value1), 2));
                     typing1 = typing2 = onFunc = false;
-                    mInput.setText(mInput.getText() + "²");
+                    SetText(mInput, mInput.getText() + "²");
                 } else if (typing2 && !value2.equals("")) {
                     value2 = String.valueOf(Math.pow(Double.parseDouble(value2), 2));
                     Click_Result(view);
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 if (typing1 && !value1.equals("")) {
                     value1 = String.valueOf(Math.pow(Double.parseDouble(value1), 3));
                     typing1 = typing2 = onFunc = false;
-                    mInput.setText(mInput.getText() + "³");
+                    SetText(mInput, mInput.getText() + "³");
                 } else if (typing2 && !value2.equals("")) {
                     value2 = String.valueOf(Math.pow(Double.parseDouble(value2), 3));
                     Click_Result(view);
@@ -220,82 +219,82 @@ public class MainActivity extends AppCompatActivity {
                 if (typing1 && !value1.equals("")) {
                     value1 = String.valueOf(factorial(Integer.parseInt(value1)));
                     typing1 = typing2 = onFunc = false;
-                    mInput.setText(mInput.getText() + "!");
+                    SetText(mInput, mInput.getText() + "!");
                 } else if (typing2 && !value2.equals("")) {
                     value2 = String.valueOf(factorial(Integer.parseInt(value2)));
                     Click_Result(view);
                 }
                 return;
-        }
-
-        if ((typing1 && !value1.equals("")) || typing2 && !value2.equals("")) return;
-
-        switch(func) {
-            case sin:
-                mInput.setText(mInput.getText() + "sin(");
-                break;
-            case cos:
-                mInput.setText(mInput.getText() + "cos(");
-                break;
-            case tan:
-                mInput.setText(mInput.getText() + "tan(");
-                break;
-            case inv_sin:
-                mInput.setText(mInput.getText() + getString(R.string.inverseSine) + "(");
-                break;
-            case inv_cos:
-                mInput.setText(mInput.getText() + getString(R.string.inverseCosine) + "(");
-                break;
-            case inv_tan:
-                mInput.setText(mInput.getText() + getString(R.string.inverseTangent) + "(");
-                break;
-            case hyp_sin:
-                mInput.setText(mInput.getText() + getString(R.string.hyperbolicSine) + "(");
-                break;
-            case hyp_cos:
-                mInput.setText(mInput.getText() + getString(R.string.hyperbolicCosine) + "(");
-                break;
-            case hyp_tan:
-                mInput.setText(mInput.getText() + getString(R.string.hyperbolicTangent) + "(");
-                break;
-            case inv_hyp_sin:
-                mInput.setText(mInput.getText() + getString(R.string.inverseHyperSine) + "(");
-                break;
-            case inv_hyp_cos:
-                mInput.setText(mInput.getText() + getString(R.string.inverseHyperCosine) + "(");
-                break;
-            case inv_hyp_tan:
-                mInput.setText(mInput.getText() + getString(R.string.inverseHyperTangent) + "(");
-                break;
-            case ln:
-                mInput.setText(mInput.getText() + getString(R.string.naturalLog) + "(");
-                break;
-            case log:
-                mInput.setText(mInput.getText() + getString(R.string.log) + "(");
-                break;
-            case fraction:
-                mInput.setText(mInput.getText() + "1/(");
-                break;
-            case e_pow:
-                mInput.setText(mInput.getText() + getString(R.string.ePower) + "(");
-                break;
             case pow:
                 //Func power must be calculate by two value
                 //if there's no first value, ignore user
                 if ((typing1 && value1.equals("")) || (typing2 && value2.equals(""))) return;
-                mInput.setText(mInput.getText() + getString(R.string.power) + "(");
+                onFunc = true;
+                SetText(mInput, mInput.getText() + getString(R.string.power) + "(");
+                break;
+        }
+
+        if ((typing1 && !value1.equals("")) || typing2 && !value2.equals("")) return;
+        switch(func) {
+            case sin:
+                SetText(mInput, mInput.getText() + "sin(");
+                break;
+            case cos:
+                SetText(mInput, mInput.getText() + "cos(");
+                break;
+            case tan:
+                SetText(mInput, mInput.getText() + "tan(");
+                break;
+            case inv_sin:
+                SetText(mInput, mInput.getText() + getString(R.string.inverseSine) + "(");
+                break;
+            case inv_cos:
+                SetText(mInput, mInput.getText() + getString(R.string.inverseCosine) + "(");
+                break;
+            case inv_tan:
+                SetText(mInput, mInput.getText() + getString(R.string.inverseTangent) + "(");
+                break;
+            case hyp_sin:
+                SetText(mInput, mInput.getText() + getString(R.string.hyperbolicSine) + "(");
+                break;
+            case hyp_cos:
+                SetText(mInput, mInput.getText() + getString(R.string.hyperbolicCosine) + "(");
+                break;
+            case hyp_tan:
+                SetText(mInput, mInput.getText() + getString(R.string.hyperbolicTangent) + "(");
+                break;
+            case inv_hyp_sin:
+                SetText(mInput, mInput.getText() + getString(R.string.inverseHyperSine) + "(");
+                break;
+            case inv_hyp_cos:
+                SetText(mInput, mInput.getText() + getString(R.string.inverseHyperCosine) + "(");
+                break;
+            case inv_hyp_tan:
+                SetText(mInput, mInput.getText() + getString(R.string.inverseHyperTangent) + "(");
+                break;
+            case ln:
+                SetText(mInput, mInput.getText() + getString(R.string.naturalLog) + "(");
+                break;
+            case log:
+                SetText(mInput, mInput.getText() + getString(R.string.log) + "(");
+                break;
+            case fraction:
+                SetText(mInput, mInput.getText() + "1/(");
+                break;
+            case e_pow:
+                SetText(mInput, mInput.getText() + getString(R.string.ePower) + "(");
                 break;
             case abs:
-                mInput.setText(mInput.getText() + "abs(");
+                SetText(mInput, mInput.getText() + "abs(");
                 break;
             case squareRoot:
-                mInput.setText(mInput.getText() + getString(R.string.squareRoot) + "(");
+                SetText(mInput, mInput.getText() + getString(R.string.squareRoot) + "(");
                 break;
             case cubeRoot:
-                mInput.setText(mInput.getText() + getString(R.string.cubeRoot) + "(");
+                SetText(mInput, mInput.getText() + getString(R.string.cubeRoot) + "(");
                 break;
             case twoPow:
-                mInput.setText(mInput.getText() + getString(R.string.twoPower) + "(");
+                SetText(mInput, mInput.getText() + getString(R.string.twoPower) + "(");
                 break;
         }
         onFunc = true;
@@ -304,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
     public void Click_Result(View view){    //on press =
         double result;
 
-        if (!value1.equals("") && !value2.equals(""))
+        if (!onFunc && !value1.equals("") && !value2.equals(""))
         {
             if (sign.equals(getString(R.string.plus))) {
                 result = Double.parseDouble(value1) + Double.parseDouble(value2);
@@ -315,27 +314,32 @@ public class MainActivity extends AppCompatActivity {
             } else if (sign.equals(getString(R.string.divide))) {
                 result = Double.parseDouble(value1) / Double.parseDouble(value2);
             } else result = Double.NaN;
-            mResult.setText(Double.toString(result));
+            SetText(mResult, Double.toString(result));
+        }
+        else if(typing2 && !valueFunc.equals(""))
+        {
+            value2 = String.valueOf(Double.parseDouble(GetFunctionValue()));
+            Click_Result(view);
         }
         else if(!valueFunc.equals(""))
         {
             result = Double.parseDouble(GetFunctionValue());
-            mResult.setText(String.valueOf(result));
+            SetText(mResult, String.valueOf(result));
         }
         else {
-            mResult.setText(value1);
+            SetText(mResult, value1);
         }
 
         //reset input
-        mInput.setText(null);
+        SetText(mInput, "");
         value1 = value2 = valueFunc = sign = "";
         decimalNumber = typing2 = false;
         typing1 = true;
     }
 
     public void Click_clear(View view) {
-        mInput.setText(null);
-        mResult.setText(null);
+        SetText(mInput, "");
+        SetText(mResult, "");
         initCalculator();
     }
 
@@ -401,6 +405,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void SetText(TextView textView, String string)
+    {   // Scale size of text automatically if it's portrait mode
+        textView.setText(string);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            int size;
+            if (textView == mResult)
+                size = 100;
+            else size = 70;
+
+            if (string.length() < 7)
+                textView.setTextSize(COMPLEX_UNIT_SP, size);
+            else if (string.length() < 8)
+                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.92));
+            else if (string.length() < 9)
+                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.84));
+            else if (string.length() < 10)
+                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.76));
+            else if (string.length() < 11)
+                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.68));
+            else if (string.length() < 12)
+                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.60));
+        }
+    }
+
     private String InputValue(String string, String value)
     {
         //If user input a constant value, ignore original value and set it to constant
@@ -430,33 +459,34 @@ public class MainActivity extends AppCompatActivity {
         if (value.equals(String.valueOf(Math.PI)) || value.equals(String.valueOf(Math.E)))
         {
             if (onFunc)
-                mInput.setText(RemoveCurrentValue(mInput.getText().toString(), '(') + value);
+                SetText(mInput, RemoveCurrentValue(mInput.getText().toString(), '(') + value);
             else if (typing2)
-                mInput.setText(RemoveCurrentValue(mInput.getText().toString(), sign.charAt(0)) + value);
+                SetText(mInput, RemoveCurrentValue(mInput.getText().toString(), sign.charAt(0)) + value);
             else
-                mInput.setText(value);
+                SetText(mInput, value);
             return;
         }
         //Show input to screen
         //If value which user is inputting is empty, add "0." automatically
-        //mInput.setText(value1 + sign + value2);
+        //SetText(mInput, value1 + sign + value2);
         if (value.equals(getString(R.string.dot)))
         {
             if (onFunc && valueFunc.equals(""))
-                mInput.setText(mInput.getText() + "0.");
+                SetText(mInput, mInput.getText() + "0.");
             else if (typing1 && value1.equals(""))
-                mInput.setText(mInput.getText() + "0.");
+                SetText(mInput, mInput.getText() + "0.");
             else if (typing2 && value2.equals(""))
-                mInput.setText(mInput.getText() + "0.");
+                SetText(mInput, mInput.getText() + "0.");
             else
-                mInput.setText(mInput.getText() + value);
+                SetText(mInput, mInput.getText() + value);
         }
         else
-            mInput.setText(mInput.getText() + value);
+            SetText(mInput, mInput.getText() + value);
     }
 
     private String RemoveCurrentValue(String string, char c)
     {
+        // This function will return a subString before 'c'
         int charRemove = 0;
         for (int i = string.length() - 1; i >= 0; i--)
         {
@@ -540,7 +570,7 @@ public class MainActivity extends AppCompatActivity {
             case pow:
                 if (typing1)
                     return String.valueOf(Math.pow(Double.parseDouble(value1), value));
-                else
+                else if (typing2)
                     return String.valueOf(Math.pow(Double.parseDouble(value2), value));
             case abs:
                 return String.valueOf(Math.abs(value));
@@ -551,28 +581,28 @@ public class MainActivity extends AppCompatActivity {
             case twoPow:
                 return String.valueOf(Math.pow(2, value));
             default:
-                return null;
+                return String.valueOf(Double.NaN);
         }
     }
 
     //================MATH=========================//
     private double asinh(double x)
-    {
+    {   // return inverse of hyperbolic sine
         return Math.log(x + Math.sqrt(x*x + 1.0));
     }
 
     private double acosh(double x)
-    {
+    {   // return inverse of hyperbolic cosine
         return Math.log(x + Math.sqrt(x*x - 1.0));
     }
 
     private double atanh(double x)
-    {
+    {   // return inverse of hyperbolic tangent
         return 0.5*Math.log( (x + 1.0) / (x - 1.0));
     }
 
     private double factorial(int x)
-    {
+    {   // return factorial of x
         int ans = 1;
         while (x != 0)
         {
@@ -585,7 +615,7 @@ public class MainActivity extends AppCompatActivity {
     private void initCalculator()
     {
         decimalNumber = onFunc = typing2 = false;
-        typing1 = true;
+        isRadiance = typing1 = true;
         value1 = value2 = valueFunc = sign = "";
         func = null;
     }

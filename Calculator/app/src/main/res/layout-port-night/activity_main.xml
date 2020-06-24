@@ -9,8 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="411dp"
+        android:layout_height="295dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,10 +29,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/zero"
+                android:scrollHorizontally="true"
                 android:textColor="@color/button_background"
                 android:textColorHint="@color/button_background"
-                android:scrollHorizontally="true"
-                android:textSize="56sp" />
+                android:textSize="100sp" />
         </HorizontalScrollView>
 
         <HorizontalScrollView
@@ -48,10 +48,11 @@
                 android:hint="@string/zero"
                 android:textColor="@color/button_background"
                 android:textColorHint="@color/button_background"
-                android:textSize="36sp"
+                android:textSize="70sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </HorizontalScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
