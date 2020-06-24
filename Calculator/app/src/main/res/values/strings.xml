@@ -2,6 +2,7 @@
     <string name="app_name">Calculator</string>
     <string name="switchPage">⇆</string>
     <string name="radius">Rad</string>
+    <string name="degree">Deg</string>
     <string name="squareRoot">√</string>
     <string name="clear">AC</string>
     <string name="switchSign">+/-</string>

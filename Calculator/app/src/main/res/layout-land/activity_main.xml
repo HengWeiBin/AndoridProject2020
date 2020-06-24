@@ -143,7 +143,9 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle" />
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/switchSign"/>
 
             <Button
                 android:id="@+id/buttonPercent"
@@ -634,7 +636,7 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 style="?android:borderlessButtonStyle"
-                android:onClick="onClickFunction"
+                android:onClick="onClickNum"
                 android:tag="@string/pi"/>
 
             <Button

@@ -90,7 +90,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/switchSign"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:onClick="onClickFunction"
+                android:tag="@string/switchSign"/>
 
             <Button
                 android:id="@+id/buttonPercent"

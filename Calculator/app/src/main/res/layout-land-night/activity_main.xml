@@ -18,26 +18,29 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/input"
+            android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/zero"
-            android:textColor="#4C4A4A"
-            android:textColorHint="#515050"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
             android:textSize="42sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sign"
+            android:id="@+id/input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="4dp"
+            android:hint="@string/zero"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -91,7 +94,8 @@
                 android:textSize="17sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle" />
+                style="?android:borderlessButtonStyle"
+                android:onClick="SwitchDegree"/>
 
             <Button
                 android:id="@+id/buttonRoot"
@@ -105,7 +109,8 @@
                 android:background="@drawable/button"
                 android:text="@string/squareRoot"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:onClick="Click_root"
+                android:onClick="onClickFunction"
+                android:tag="@string/squareRoot"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -143,7 +148,9 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle" />
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/switchSign"/>
 
             <Button
                 android:id="@+id/buttonPercent"
@@ -160,7 +167,9 @@
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle" />
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/percent"/>
 
             <Button
                 android:id="@+id/buttonDiv"
@@ -174,7 +183,8 @@
                 android:background="@drawable/button"
                 android:text="@string/divide"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:onClick="Click_div"
+                android:onClick="onClickOperator"
+                android:tag="@string/divide"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -199,7 +209,8 @@
                 android:background="@drawable/button"
                 android:text="@string/sine"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:onClick="Click_sin"
+                android:onClick="onClickFunction"
+                android:tag="@string/sine"
                 android:textSize="20sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -217,7 +228,8 @@
                 android:background="@drawable/button"
                 android:text="@string/cosine"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:onClick="Click_cos"
+                android:onClick="onClickFunction"
+                android:tag="@string/cosine"
                 android:textSize="20sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -235,7 +247,8 @@
                 android:background="@drawable/button"
                 android:text="@string/tan"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:onClick="Click_tan"
+                android:onClick="onClickFunction"
+                android:tag="@string/tan"
                 android:textSize="20sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -252,7 +265,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/seven"
-                android:onClick="Click_7"
+                android:onClick="onClickNum"
+                android:tag="@string/seven"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -269,7 +283,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/eight"
-                android:onClick="Click_8"
+                android:onClick="onClickNum"
+                android:tag="@string/eight"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -286,7 +301,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/nine"
-                android:onClick="Click_9"
+                android:onClick="onClickNum"
+                android:tag="@string/nine"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -303,7 +319,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/multi"
-                android:onClick="Click_multi"
+                android:onClick="onClickOperator"
+                android:tag="@string/multi"
                 android:textSize="20sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -327,7 +344,8 @@
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/button"
-                android:onClick="Click_ln"
+                android:onClick="onClickFunction"
+                android:tag="@string/naturalLog"
                 android:text="@string/naturalLog"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="20sp"
@@ -345,7 +363,8 @@
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/button"
-                android:onClick="Click_log"
+                android:onClick="onClickFunction"
+                android:tag="@string/log"
                 android:text="@string/log"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="20sp"
@@ -368,7 +387,9 @@
                 android:textSize="20sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle"/>
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/fraction"/>
 
             <Button
                 android:id="@+id/button_4"
@@ -381,7 +402,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/four"
-                android:onClick="Click_4"
+                android:onClick="onClickNum"
+                android:tag="@string/four"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -398,7 +420,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/five"
-                android:onClick="Click_5"
+                android:onClick="onClickNum"
+                android:tag="@string/five"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -415,7 +438,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/six"
-                android:onClick="Click_6"
+                android:onClick="onClickNum"
+                android:tag="@string/six"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -432,7 +456,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/minus"
-                android:onClick="Click_sub"
+                android:onClick="onClickOperator"
+                android:tag="@string/minus"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -446,7 +471,7 @@
             android:hapticFeedbackEnabled="false">
 
             <Button
-                android:id="@+id/button27"
+                android:id="@+id/buttonEPower"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -457,6 +482,27 @@
                 android:background="@drawable/button"
                 android:text="@string/ePower"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="24sp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="8dp"
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/ePower"/>
+
+            <Button
+                android:id="@+id/buttonSquare"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:text="@string/square"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:onClick="onClickFunction"
+                android:tag="@string/square"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -472,30 +518,14 @@
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/button"
-                android:text="@string/square"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:onClick="Click_power"
-                android:textSize="24sp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle" />
-
-            <Button
-                android:id="@+id/button26"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/button"
                 android:text="@string/power"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle" />
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/power"/>
 
             <Button
                 android:id="@+id/button_1"
@@ -508,7 +538,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/one"
-                android:onClick="Click_1"
+                android:onClick="onClickNum"
+                android:tag="@string/one"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -525,7 +556,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/two"
-                android:onClick="Click_2"
+                android:onClick="onClickNum"
+                android:tag="@string/two"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -542,7 +574,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/three"
-                android:onClick="Click_3"
+                android:onClick="onClickNum"
+                android:tag="@string/three"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -559,7 +592,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/plus"
-                android:onClick="Click_add"
+                android:onClick="onClickOperator"
+                android:tag="@string/plus"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -573,7 +607,7 @@
             android:hapticFeedbackEnabled="false">
 
             <Button
-                android:id="@+id/button31"
+                android:id="@+id/buttonAbsolute"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -587,7 +621,9 @@
                 android:textSize="20sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle" />
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/absolute"/>
 
             <Button
                 android:id="@+id/buttonPhi"
@@ -604,10 +640,12 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
-                style="?android:borderlessButtonStyle"/>
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickNum"
+                android:tag="@string/pi"/>
 
             <Button
-                android:id="@+id/button30"
+                android:id="@+id/buttonFactorial"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -617,11 +655,13 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:text="е"
+                android:text="@string/factorial"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle"/>
+                style="?android:borderlessButtonStyle"
+                android:onClick="onClickFunction"
+                android:tag="@string/factorial"/>
 
             <Button
                 android:id="@+id/buttonBackspace"
@@ -651,7 +691,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/zero"
-                android:onClick="Click_0"
+                android:onClick="onClickNum"
+                android:tag="@string/zero"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
@@ -668,7 +709,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button"
                 android:text="@string/dot"
-                android:onClick="Click_dot"
+                android:onClick="onClickNum"
+                android:tag="@string/dot"
                 android:textSize="24sp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="8dp"
