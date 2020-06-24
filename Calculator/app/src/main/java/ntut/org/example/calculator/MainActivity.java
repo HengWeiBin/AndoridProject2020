@@ -104,10 +104,8 @@ public class MainActivity extends AppCompatActivity {
         else if (typing1) value1 = InputValue(value1, value);
 
         else if (typing2) value2 = InputValue(value2, value);
-        //Do not show value on screen if all input is unavailable
-        else return;
 
-        ShowValue(value);
+        //Do not show value on screen if all input is unavailable
     }
 
     public void onClickOperator(View view)
@@ -230,6 +228,8 @@ public class MainActivity extends AppCompatActivity {
                 return;
         }
 
+        if ((typing1 && !value1.equals("")) || typing2 && !value2.equals("")) return;
+
         switch(func) {
             case sin:
                 mInput.setText(mInput.getText() + "sin(");
@@ -329,6 +329,7 @@ public class MainActivity extends AppCompatActivity {
         //reset input
         mInput.setText(null);
         value1 = value2 = valueFunc = sign = "";
+        decimalNumber = typing2 = false;
         typing1 = true;
     }
 
@@ -403,23 +404,39 @@ public class MainActivity extends AppCompatActivity {
     private String InputValue(String string, String value)
     {
         //If user input a constant value, ignore original value and set it to constant
-        if (value.equals(String.valueOf(Math.E))) return value;
-        if (value.equals(String.valueOf(Math.PI))) return value;
+        if (value.equals(String.valueOf(Math.E)) || value.equals(String.valueOf(Math.PI)))
+        {
+            decimalNumber = true;
+            ShowValue(value);
+            return value;
+        }
 
         if (value.equals(getString(R.string.dot)))
         {
             if (!decimalNumber) {
                 decimalNumber = true;
+                ShowValue(value);
                 if (string.equals("")) return "0.";
                 return string + value;
             }
             else return string;
         }
+        ShowValue(value);
         return string + value;
     }
 
     private void ShowValue(String value)
     {
+        if (value.equals(String.valueOf(Math.PI)) || value.equals(String.valueOf(Math.E)))
+        {
+            if (onFunc)
+                mInput.setText(RemoveCurrentValue(mInput.getText().toString(), '(') + value);
+            else if (typing2)
+                mInput.setText(RemoveCurrentValue(mInput.getText().toString(), sign.charAt(0)) + value);
+            else
+                mInput.setText(value);
+            return;
+        }
         //Show input to screen
         //If value which user is inputting is empty, add "0." automatically
         //mInput.setText(value1 + sign + value2);
@@ -436,6 +453,17 @@ public class MainActivity extends AppCompatActivity {
         }
         else
             mInput.setText(mInput.getText() + value);
+    }
+
+    private String RemoveCurrentValue(String string, char c)
+    {
+        int charRemove = 0;
+        for (int i = string.length() - 1; i >= 0; i--)
+        {
+            if (string.charAt(i) != c) charRemove++;
+            else break;
+        }
+        return string.substring(0, string.length() - charRemove);
     }
 
     private String GetFunctionValue() {
@@ -520,6 +548,8 @@ public class MainActivity extends AppCompatActivity {
                 return String.valueOf(Math.sqrt(value));
             case cubeRoot:
                 return String.valueOf(Math.cbrt(value));
+            case twoPow:
+                return String.valueOf(Math.pow(2, value));
             default:
                 return null;
         }

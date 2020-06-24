@@ -17,32 +17,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/result"
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:hint="@string/zero"
-            android:textColor="@color/button_background"
-            android:textColorHint="@color/button_background"
-            android:textSize="56sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@id/input"
+            <TextView
+                android:id="@+id/result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/zero"
+                android:textColor="@color/button_background"
+                android:textColorHint="@color/button_background"
+                android:scrollHorizontally="true"
+                android:textSize="56sp" />
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:hint="@string/zero"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/zero"
+                android:textColor="@color/button_background"
+                android:textColorHint="@color/button_background"
+                android:textSize="36sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </HorizontalScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
@@ -378,22 +387,6 @@
             android:hapticFeedbackEnabled="false">
 
             <Button
-                android:id="@+id/buttonBackspace"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:text="@string/backspace"
-                android:textSize="24sp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="8dp"
-                style="?android:borderlessButtonStyle"/>
-
-            <Button
                 android:id="@+id/button_0"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -401,7 +394,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="1dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:background="@drawable/button"
                 android:text="@string/zero"
                 android:textSize="24sp"
