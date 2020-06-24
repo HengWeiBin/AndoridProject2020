@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 @SuppressLint("SetTextI18n")
@@ -91,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
     public void onClickNum(View view)
     {
         String value = view.getTag().toString();
+
+        // If user input a constant symbol, convert it to value
+        if (value.equals(getString(R.string.pi))) {
+            if (onShift)
+                value = String.valueOf(Math.E);
+            else
+                value = String.valueOf(Math.PI);
+        }
 
         //Write value to variable
         if (onFunc) valueFunc = InputValue(valueFunc, value);
@@ -396,6 +402,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String InputValue(String string, String value)
     {
+        //If user input a constant value, ignore original value and set it to constant
+        if (value.equals(String.valueOf(Math.E))) return value;
+        if (value.equals(String.valueOf(Math.PI))) return value;
+
         if (value.equals(getString(R.string.dot)))
         {
             if (!decimalNumber) {
@@ -412,6 +422,7 @@ public class MainActivity extends AppCompatActivity {
     {
         //Show input to screen
         //If value which user is inputting is empty, add "0." automatically
+        //mInput.setText(value1 + sign + value2);
         if (value.equals(getString(R.string.dot)))
         {
             if (onFunc && valueFunc.equals(""))
@@ -430,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
     private String GetFunctionValue() {
         Double value = Double.parseDouble(valueFunc);
 
-        //reset typing function
+        //reset state of typing function
         onFunc = false;
         valueFunc = "";
 
@@ -543,7 +554,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initCalculator()
     {
-        decimalNumber = onShift = onFunc = typing2 = false;
+        decimalNumber = onFunc = typing2 = false;
         typing1 = true;
         value1 = value2 = valueFunc = sign = "";
         func = null;
@@ -551,6 +562,9 @@ public class MainActivity extends AppCompatActivity {
 
     private math_func GetMathFunc(String function)
     {
+        //There are two pages in our calculator,
+        //but both pages of button share same button
+        //hence, I use a function to identify them
         if (getString(R.string.switchSign).equals(function))
         {
             return math_func.switchSign;
