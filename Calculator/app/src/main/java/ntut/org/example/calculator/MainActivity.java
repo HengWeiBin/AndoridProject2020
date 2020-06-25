@@ -3,11 +3,14 @@ package ntut.org.example.calculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
@@ -97,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 value = String.valueOf(Math.E);
             else
                 value = String.valueOf(Math.PI);
+        }
+        if (value.equals(getString(R.string.answer))){
+            value = mResult.getText().toString();
         }
 
         //Write value to variable
@@ -217,11 +223,11 @@ public class MainActivity extends AppCompatActivity {
                 return;
             case factorial:
                 if (typing1 && !value1.equals("")) {
-                    value1 = String.valueOf(factorial(Integer.parseInt(value1)));
+                    value1 = String.valueOf(factorial((int)Double.parseDouble(value1)));
                     typing1 = typing2 = onFunc = false;
                     SetText(mInput, mInput.getText() + "!");
                 } else if (typing2 && !value2.equals("")) {
-                    value2 = String.valueOf(factorial(Integer.parseInt(value2)));
+                    value2 = String.valueOf(factorial((int)Double.parseDouble(value2)));
                     Click_Result(view);
                 }
                 return;
@@ -405,28 +411,54 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void SetText(TextView textView, String string)
+    private void SetText(final TextView textView, String string)
     {   // Scale size of text automatically if it's portrait mode
         textView.setText(string);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-        {
-            int size;
+        {   // original text size of mResult is 100sp, mInput is 70sp
+            float originalSize;
             if (textView == mResult)
-                size = 100;
-            else size = 70;
+                originalSize = 100;
+            else originalSize = 70;
 
+            // Start size = current size
+            float startSize = textView.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
+
+            //End size according to length of string
+            float endSize;
             if (string.length() < 7)
-                textView.setTextSize(COMPLEX_UNIT_SP, size);
+                endSize = originalSize;
             else if (string.length() < 8)
-                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.92));
+                endSize = originalSize * 0.92f;
             else if (string.length() < 9)
-                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.84));
+                endSize = originalSize * 0.84f;
             else if (string.length() < 10)
-                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.76));
+                endSize = originalSize * 0.76f;
             else if (string.length() < 11)
-                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.68));
+                endSize = originalSize * 0.68f;
             else if (string.length() < 12)
-                textView.setTextSize(COMPLEX_UNIT_SP, (float) (size * 0.60));
+                endSize = originalSize * 0.60f;
+            else
+                endSize = originalSize * 0.52f;
+
+            // Handle animation of text size change
+            ValueAnimator animator = ValueAnimator.ofFloat(startSize, endSize);
+            animator.setDuration(200);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float animatedValue = (float) valueAnimator.getAnimatedValue();
+                    textView.setTextSize(animatedValue);
+                }
+            });
+            animator.start();
+        }
+
+        // scrollView of mInput maintain at last digit
+        if (textView == mInput)
+        {
+            HorizontalScrollView scrollView = findViewById(R.id.inputScrollView);
+            scrollView.fullScroll(ScrollView.FOCUS_RIGHT);
         }
     }
 
@@ -434,12 +466,13 @@ public class MainActivity extends AppCompatActivity {
     {
         //If user input a constant value, ignore original value and set it to constant
         if (value.equals(String.valueOf(Math.E)) || value.equals(String.valueOf(Math.PI)))
-        {
+        {   // both Pi and e are decimal number
             decimalNumber = true;
             ShowValue(value);
             return value;
         }
 
+        // if user already input a dot, ignore if a dot being input again
         if (value.equals(getString(R.string.dot)))
         {
             if (!decimalNumber) {

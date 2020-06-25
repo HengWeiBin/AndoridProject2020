@@ -22,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:scrollbars="none">
 
             <TextView
                 android:id="@+id/result"
@@ -36,10 +37,12 @@
         </HorizontalScrollView>
 
         <HorizontalScrollView
+            android:id="@+id/inputScrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scrollbars="none">
 
             <TextView
                 android:id="@+id/input"
@@ -388,22 +391,40 @@
             android:hapticFeedbackEnabled="false">
 
             <Button
-                android:id="@+id/button_0"
+                android:id="@+id/button_ans"
+                style="?android:borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="1dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="1dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:background="@drawable/button"
-                android:text="@string/zero"
-                android:textSize="24sp"
-                android:layout_marginEnd="5dp"
+                android:onClick="onClickNum"
+                android:tag="@string/answer"
+                android:text="@string/answer"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/button_0"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/button"
                 android:onClick="onClickNum"
                 android:tag="0"
-                style="?android:borderlessButtonStyle"/>
+                android:text="@string/zero"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/buttonDot"
