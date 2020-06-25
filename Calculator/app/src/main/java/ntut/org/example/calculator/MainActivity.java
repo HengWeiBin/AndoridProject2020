@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         else if (typing2) value2 = InputValue(value2, value);
 
+        else displayError();
         //Do not show value on screen if all input is unavailable
     }
 
@@ -130,12 +132,20 @@ public class MainActivity extends AppCompatActivity {
                 value1 = mResult.getText().toString();
             }
             //ignore when user click operator without input number
-            else return;
+            else
+            {
+                displayError();
+                return;
+            }
         }
 
         if (onFunc)
         {
-            if (valueFunc.equals("")) return;
+            if (valueFunc.equals(""))
+            {   // Toast message and ignore input when user click operator with out input valueFunction
+                displayError();
+                return;
+            }
 
             if (typing1)
             {
@@ -175,7 +185,11 @@ public class MainActivity extends AppCompatActivity {
         func = GetMathFunc(view.getTag().toString());
 
         //ignore user if he's typing any func's value
-        if (func == null || (onFunc && func != math_func.switchSign)) return;
+        if (func == null || (onFunc && func != math_func.switchSign))
+        {
+            displayError();
+            return;
+        }
 
         switch(func) {
             case switchSign:
@@ -240,7 +254,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        if ((typing1 && !value1.equals("")) || typing2 && !value2.equals("")) return;
+        if ((typing1 && !value1.equals("")) || typing2 && !value2.equals(""))
+        {   //Toast error when user input a function behind value without operator
+            displayError();
+            return;
+        }
+
         switch(func) {
             case sin:
                 SetText(mInput, mInput.getText() + "sin(");
@@ -472,7 +491,7 @@ public class MainActivity extends AppCompatActivity {
             return value;
         }
 
-        // if user already input a dot, ignore if a dot being input again
+        // if user already input a dot, toast error if a dot being input again
         if (value.equals(getString(R.string.dot)))
         {
             if (!decimalNumber) {
@@ -481,7 +500,10 @@ public class MainActivity extends AppCompatActivity {
                 if (string.equals("")) return "0.";
                 return string + value;
             }
-            else return string;
+            else {
+                displayError();
+                return string;
+            }
         }
         ShowValue(value);
         return string + value;
@@ -527,6 +549,11 @@ public class MainActivity extends AppCompatActivity {
             else break;
         }
         return string.substring(0, string.length() - charRemove);
+    }
+
+    private void displayError() {
+        Toast.makeText(getApplicationContext(), "Wrong format!",
+                Toast.LENGTH_SHORT).show();
     }
 
     private String GetFunctionValue() {
