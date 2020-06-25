@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         else if (typing2) value2 = InputValue(value2, value);
 
-        else displayError();
+        else ToastError();
         //Do not show value on screen if all input is unavailable
     }
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             //ignore when user click operator without input number
             else
             {
-                displayError();
+                ToastError();
                 return;
             }
         }
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (valueFunc.equals(""))
             {   // Toast message and ignore input when user click operator with out input valueFunction
-                displayError();
+                ToastError();
                 return;
             }
 
@@ -187,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
         //ignore user if he's typing any func's value
         if (func == null || (onFunc && func != math_func.switchSign))
         {
-            displayError();
+            func = temp;
+            ToastError();
             return;
         }
 
@@ -203,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                     valueFunc = String.valueOf(Double.parseDouble(valueFunc) * -1);
                     SetText(mInput, RemoveCurrentValue(mInput.getText().toString(), '(') + valueFunc);
                 }
+                else ToastError();
                 func = temp;
                 return;
             case percent:
@@ -214,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
                     value2 = String.valueOf(Double.parseDouble(value2) / 100);
                     Click_Result(view);
                 }
+                else ToastError();
                 return;
             case square:
                 if (typing1 && !value1.equals("")) {
@@ -224,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     value2 = String.valueOf(Math.pow(Double.parseDouble(value2), 2));
                     Click_Result(view);
                 }
+                else ToastError();
                 return;
             case cube:
                 if (typing1 && !value1.equals("")) {
@@ -234,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
                     value2 = String.valueOf(Math.pow(Double.parseDouble(value2), 3));
                     Click_Result(view);
                 }
+                else ToastError();
                 return;
             case factorial:
                 if (typing1 && !value1.equals("")) {
@@ -244,11 +249,15 @@ public class MainActivity extends AppCompatActivity {
                     value2 = String.valueOf(factorial((int)Double.parseDouble(value2)));
                     Click_Result(view);
                 }
+                else ToastError();
                 return;
             case pow:
                 //Func power must be calculate by two value
                 //if there's no first value, ignore user
-                if ((typing1 && value1.equals("")) || (typing2 && value2.equals(""))) return;
+                if ((typing1 && value1.equals("")) || (typing2 && value2.equals(""))){
+                    ToastError();
+                    return;
+                }
                 onFunc = true;
                 SetText(mInput, mInput.getText() + getString(R.string.power) + "(");
                 break;
@@ -256,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
         if ((typing1 && !value1.equals("")) || typing2 && !value2.equals(""))
         {   //Toast error when user input a function behind value without operator
-            displayError();
+            ToastError();
             return;
         }
 
@@ -329,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
         double result;
 
         if (!onFunc && !value1.equals("") && !value2.equals(""))
-        {
+        {   //Normal situation, an operator with two value
             if (sign.equals(getString(R.string.plus))) {
                 result = Double.parseDouble(value1) + Double.parseDouble(value2);
             } else if (sign.equals(getString(R.string.minus))) {
@@ -341,15 +350,27 @@ public class MainActivity extends AppCompatActivity {
             } else result = Double.NaN;
             SetText(mResult, Double.toString(result));
         }
-        else if(typing2 && !valueFunc.equals(""))
-        {
-            value2 = String.valueOf(Double.parseDouble(GetFunctionValue()));
-            Click_Result(view);
+        else if(typing2 && onFunc)
+        {   //when user is input value2 as function
+            if (!valueFunc.equals("")) {
+                value2 = String.valueOf(Double.parseDouble(GetFunctionValue()));
+                Click_Result(view);
+            }
+            else {  //Toast error if function value is empty
+                ToastError();
+                return;
+            }
         }
-        else if(!valueFunc.equals(""))
-        {
-            result = Double.parseDouble(GetFunctionValue());
-            SetText(mResult, String.valueOf(result));
+        else if(onFunc)
+        {   //when user is input value1 as function
+            if (!valueFunc.equals("")) {
+                result = Double.parseDouble(GetFunctionValue());
+                SetText(mResult, String.valueOf(result));
+            }
+            else{  //Toast error if function value is empty
+                ToastError();
+                return;
+            }
         }
         else {
             SetText(mResult, value1);
@@ -501,7 +522,7 @@ public class MainActivity extends AppCompatActivity {
                 return string + value;
             }
             else {
-                displayError();
+                ToastError();
                 return string;
             }
         }
@@ -551,7 +572,7 @@ public class MainActivity extends AppCompatActivity {
         return string.substring(0, string.length() - charRemove);
     }
 
-    private void displayError() {
+    private void ToastError() {
         Toast.makeText(getApplicationContext(), "Wrong format!",
                 Toast.LENGTH_SHORT).show();
     }
