@@ -504,9 +504,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String InputValue(String string, String value)
     {
-        //If user input a constant value, ignore original value and set it to constant
-        if (value.equals(String.valueOf(Math.E)) || value.equals(String.valueOf(Math.PI)))
-        {   // both Pi and e are decimal number
+        //If user input a constant value or recent answer, ignore original value and set it to constant
+        if (value.equals(String.valueOf(Math.E)) || value.equals(String.valueOf(Math.PI))
+                || value.equals(mResult.getText().toString()))
+        {   // recent result, Pi and e are decimal number
             decimalNumber = true;
             ShowValue(value);
             return value;
@@ -532,7 +533,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void ShowValue(String value)
     {
-        if (value.equals(String.valueOf(Math.PI)) || value.equals(String.valueOf(Math.E)))
+        if (value.equals(String.valueOf(Math.PI)) || value.equals(String.valueOf(Math.E))
+                || value.equals(mResult.getText().toString()))
         {
             if (onFunc)
                 SetText(mInput, RemoveCurrentValue(mInput.getText().toString(), '(') + value);
